@@ -1,4 +1,9 @@
 
 export type ApiPaths = {
-  root: string;
+  users: string;
 };
+
+export type ErrorResponseBody = {
+  ok: boolean
+  errors: Record<string, {msg: string}>
+}

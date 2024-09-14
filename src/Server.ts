@@ -1,32 +1,41 @@
 import express, { Express } from "express"
 import cors from "cors"
+import dbConnection from "./db/config"
+import userRouter from "./routes/user"
 
 import { ApiPaths } from "./interfaces/utils"
 
 export class Server {
-  private app: Express;
-  private port: number;
-  private paths: ApiPaths;
+  private app: Express
+  private port: number
+  private paths: ApiPaths
+  private basePath: string
 
   constructor() {
-    this.port = parseInt(process.env.PORT || "3000");
-    this.app = express();
+    this.basePath = "/api/v1"
+    this.port = parseInt(process.env.PORT || "3000")
+    this.app = express()
     this.paths = {
-      root: "/",
+      users: "/users",
     }
-    this.middlwares();
-    this.routes();
+    this.connectDB()
+    this.middlwares()
+    this.routes()
+  }
+
+  connectDB() {
+    if (process.env.NODE_ENV !== 'test') {
+      dbConnection()
+    }
   }
 
   middlwares() {
     this.app.use(cors())
-    this.app.use(express.json());
+    this.app.use(express.json())
   }
 
   routes() {
-    this.app.get(this.paths.root, (req, res) => {
-      res.send("Express + TypeScript Server")
-    })
+    this.app.use(`${this.basePath}${this.paths.users}`, userRouter)
   }
 
   listen() {
