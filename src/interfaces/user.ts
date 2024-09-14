@@ -11,7 +11,7 @@ export interface User {
 
 export interface UpdateUserBodyRequest {
   isActive: boolean
-  lastLoginTime: string
+  lastLoginTime?: string
 }
 
 export interface UserDocument extends Document, User {

@@ -24,9 +24,9 @@ export const getUsersController = async( req: Request, res: Response ) => {
 
 export const updateUserController = async( req: Request, res: Response ) => {
   const { id } = req.params
-  const { isActive, lastLoginTime } = req.body
+  const { isActive } = req.body
   try {
-      const user = await updateUser( id, {isActive, lastLoginTime} )
+      const user = await updateUser(id, {isActive})
       res.status( 200 ).json( user )
   } catch (error) {
       handleControllerError( res, error )

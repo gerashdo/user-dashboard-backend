@@ -18,7 +18,6 @@ router.get("/", getUsersController)
 router.put("/:id",
   userExists,
   body("isActive").isBoolean().withMessage("isActive must be a boolean"),
-  body("lastLoginTime").isISO8601().withMessage("lastLoginTime must be a valid date"),
   checkValidations,
   updateUserController
 )
