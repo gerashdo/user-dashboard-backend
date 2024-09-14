@@ -14,3 +14,7 @@ export const createUser = async (body: UserInput) => {
   await user.save()
   return user
 }
+
+export const getUsers = async () => {
+  return (await User.find()).map( user => user.shorted)
+}

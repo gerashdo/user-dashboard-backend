@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { body } from "express-validator"
 import { checkValidations, isEmailUnique } from "../middlewares/userValidations"
-import { createUserController } from "../controllers/user"
+import { createUserController, getUsersController } from "../controllers/user"
 
 const router = Router()
 
@@ -12,5 +12,7 @@ router.post("/",
   checkValidations,
   isEmailUnique,
   createUserController)
+
+router.get("/", getUsersController)
 
 export default router

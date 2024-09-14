@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
-import { User } from "../interfaces/user";
+import { User, UserDocument } from "../interfaces/user";
 
-const UserSchema = new Schema<User>({
+const UserSchema = new Schema<UserDocument>({
   name: {
     type: String,
     required: true
@@ -29,4 +29,9 @@ const UserSchema = new Schema<User>({
   versionKey: false,
 })
 
-export default mongoose.model<User>("User", UserSchema)
+UserSchema.virtual('shorted').get( function(){
+  const { password, ...rest } = this.toJSON()
+  return rest
+})
+
+export default mongoose.model<UserDocument>("User", UserSchema)
