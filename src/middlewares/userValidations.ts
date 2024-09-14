@@ -26,6 +26,18 @@ export const userExists = async (req: Request, res: Response, next: NextFunction
   next()
 }
 
+export const emailExists = async (req: Request, res: Response, next: NextFunction) => {
+  const { email } = req.body
+  const user = await User.findOne({email})
+  if (!user) {
+    return res.status(401).json({
+      ok: false,
+      errors: {email: {msg: 'Email not found'}},
+    })
+  }
+  next()
+}
+
 export const checkValidations = ( req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if( !errors.isEmpty() ){

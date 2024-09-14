@@ -2,6 +2,7 @@ import express, { Express } from "express"
 import cors from "cors"
 import dbConnection from "./db/config"
 import userRouter from "./routes/user"
+import authRouter from "./routes/auth"
 
 import { ApiPaths } from "./interfaces/utils"
 
@@ -17,6 +18,7 @@ export class Server {
     this.app = express()
     this.paths = {
       users: "/users",
+      auth: "/auth",
     }
     this.connectDB()
     this.middlwares()
@@ -36,6 +38,7 @@ export class Server {
 
   routes() {
     this.app.use(`${this.basePath}${this.paths.users}`, userRouter)
+    this.app.use(`${this.basePath}${this.paths.auth}`, authRouter)
   }
 
   listen() {

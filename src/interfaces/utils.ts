@@ -1,6 +1,7 @@
 
 export type ApiPaths = {
-  users: string;
+  users: string
+  auth: string
 };
 
 export type ErrorResponseBody = {

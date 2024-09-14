@@ -20,7 +20,7 @@ export const getUsers = async () => {
 }
 
 export const updateUser = async (id: string, body: UpdateUserBodyRequest) => {
-  const user = await User.findByIdAndUpdate(id, body)
+  const user = await User.findByIdAndUpdate(id, body, { new: true })
   if (!user) {
     throw new Error('User not found')
   }

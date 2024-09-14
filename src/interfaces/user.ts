@@ -16,6 +16,7 @@ export interface UpdateUserBodyRequest {
 
 export interface UserDocument extends Document, User {
   shorted: Omit<this, 'password'>
+  comparePassword(password: string): Promise<boolean>
 }
 
 export interface UserInput {
