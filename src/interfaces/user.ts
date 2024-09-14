@@ -9,6 +9,11 @@ export interface User {
   isActive: boolean
 }
 
+export interface UpdateUserBodyRequest {
+  isActive: boolean
+  lastLoginTime: string
+}
+
 export interface UserDocument extends Document, User {
   shorted: Omit<this, 'password'>
 }

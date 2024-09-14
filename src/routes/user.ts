@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { body } from "express-validator"
-import { checkValidations, isEmailUnique } from "../middlewares/userValidations"
-import { createUserController, getUsersController } from "../controllers/user"
+import { checkValidations, isEmailUnique, userExists } from "../middlewares/userValidations"
+import { createUserController, deleteUserController, getUsersController, updateUserController } from "../controllers/user"
 
 const router = Router()
 
@@ -14,5 +14,15 @@ router.post("/",
   createUserController)
 
 router.get("/", getUsersController)
+
+router.put("/:id",
+  userExists,
+  body("isActive").isBoolean().withMessage("isActive must be a boolean"),
+  body("lastLoginTime").isISO8601().withMessage("lastLoginTime must be a valid date"),
+  checkValidations,
+  updateUserController
+)
+
+router.delete("/:id", userExists, deleteUserController)
 
 export default router
