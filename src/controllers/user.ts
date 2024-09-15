@@ -12,7 +12,7 @@ export const createUserController = async(req: Request, res: Response) => {
   }
 }
 
-export const getUsersController = async(res: Response) => {
+export const getUsersController = async(req: Request, res: Response) => {
   try {
       const users = await getUsers()
       res.status(200).json(users)

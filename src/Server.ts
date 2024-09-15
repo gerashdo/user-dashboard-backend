@@ -4,6 +4,7 @@ import dbConnection from "./db/config"
 import userRouter from "./routes/user"
 import authRouter from "./routes/auth"
 import { ApiPaths } from "./interfaces/utils"
+import { notFound } from "./controllers/404"
 
 
 export class Server {
@@ -33,12 +34,14 @@ export class Server {
 
   middlwares() {
     this.app.use(cors())
+    this.app.use(express.static('public'))
     this.app.use(express.json())
   }
 
   routes() {
     this.app.use(`${this.basePath}${this.paths.users}`, userRouter)
     this.app.use(`${this.basePath}${this.paths.auth}`, authRouter)
+    this.app.get('*', notFound)
   }
 
   listen() {
