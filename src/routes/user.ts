@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { body } from "express-validator"
 import { checkValidations, isEmailUnique, userExists } from "../middlewares/userValidations"
-import { createUserController, deleteUserController, getUsersController, updateUserController } from "../controllers/user"
+import { createUserController, deleteUserController, getUserController, getUsersController, updateUserController } from "../controllers/user"
 
 const router = Router()
 
@@ -14,6 +14,8 @@ router.post("/",
   createUserController)
 
 router.get("/", getUsersController)
+
+router.get("/:id", userExists, getUserController)
 
 router.put("/:id",
   userExists,

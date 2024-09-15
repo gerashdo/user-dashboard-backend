@@ -19,6 +19,14 @@ export const getUsers = async () => {
   return (await User.find()).map( user => user.shorted)
 }
 
+export const getUserById = async (id: string) => {
+  const user = await User.findById(id)
+  if (!user) {
+    throw new Error('User not found')
+  }
+  return user.shorted
+}
+
 export const updateUser = async (id: string, body: UpdateUserBodyRequest) => {
   const user = await User.findByIdAndUpdate(id, body, { new: true })
   if (!user) {
