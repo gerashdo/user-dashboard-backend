@@ -1,8 +1,9 @@
 import mongoose, { Schema } from "mongoose";
-import { User, UserDocument } from '../interfaces/user';
+import { UserDocument } from '../interfaces/user';
 import { comparePassword } from "../helpers/encryp";
 
 const UserSchema = new Schema<UserDocument>({
+
   name: {
     type: String,
     required: true
@@ -35,7 +36,7 @@ UserSchema.methods.comparePassword = function(password: string): boolean {
 }
 
 UserSchema.virtual('shorted').get( function(){
-  const { password, ...rest } = this.toJSON()
+  const {password, ...rest} = this.toJSON()
   return rest
 })
 

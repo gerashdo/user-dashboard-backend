@@ -5,7 +5,7 @@ import User from "../models/User"
 
 export const createUser = async (body: UserInput) => {
   const {password, ...data} = body
-  const encryptedPassword = encryptPassword( password )
+  const encryptedPassword = encryptPassword(password)
   if (!encryptedPassword) {
     throw new Error('Error encrypting password')
   }
@@ -28,7 +28,7 @@ export const getUserById = async (id: string) => {
 }
 
 export const updateUser = async (id: string, body: UpdateUserBodyRequest) => {
-  const user = await User.findByIdAndUpdate(id, body, { new: true })
+  const user = await User.findByIdAndUpdate(id, body, {new: true})
   if (!user) {
     throw new Error('User not found')
   }

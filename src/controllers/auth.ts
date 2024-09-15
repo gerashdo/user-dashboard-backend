@@ -10,7 +10,7 @@ export const loginController = async(req: Request, res: Response) => {
       if (!user) {
         res.status(401).json({
           ok: false,
-          errors: { credentials: {msg: 'Bad credentials or blocked user'} }
+          errors: {credentials: {msg: 'Bad credentials or blocked user'}}
         })
         return
       }

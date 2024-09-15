@@ -1,10 +1,11 @@
 import { Response } from "express"
 
-export const handleControllerError = ( res: Response, error: unknown ) => {
+
+export const handleControllerError = (res: Response, error: unknown) => {
   console.log(getErrorMessage(error))
-  res.status( 500 ).json({
+  res.status(500).json({
     ok: false,
-    errors: { server: { msg: 'Internal server error' }}
+    errors: {server: {msg: 'Internal server error'}}
   })
 }
 

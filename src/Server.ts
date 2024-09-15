@@ -3,8 +3,8 @@ import cors from "cors"
 import dbConnection from "./db/config"
 import userRouter from "./routes/user"
 import authRouter from "./routes/auth"
-
 import { ApiPaths } from "./interfaces/utils"
+
 
 export class Server {
   private app: Express
@@ -43,7 +43,7 @@ export class Server {
 
   listen() {
     this.app.listen(this.port, () => {
-      console.log(`[server]: Server is running at http://localhost:${this.port}`)
+      console.log(`[server]: Server is running at port ${this.port}`)
     })
   }
 }
