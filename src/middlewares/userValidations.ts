@@ -6,7 +6,7 @@ export const isEmailUnique = async (req: Request, res: Response, next: NextFunct
   const { email } = req.body
   const user = await User.findOne({email})
   if (user) {
-    return res.status(400).json({
+    return res.status(409).json({
       ok: false,
       errors: {email: {msg: 'Email already exists'}},
     })
@@ -30,7 +30,7 @@ export const emailExists = async (req: Request, res: Response, next: NextFunctio
   const { email } = req.body
   const user = await User.findOne({email})
   if (!user) {
-    return res.status(401).json({
+    return res.status(404).json({
       ok: false,
       errors: {email: {msg: 'Email not found'}},
     })
